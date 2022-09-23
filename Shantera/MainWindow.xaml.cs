@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shantera.GameProject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,29 @@ namespace Shantera
         public MainWindow()
         {
             InitializeComponent();
+
+            Loaded += OnMainWindowLoaded;
+        }
+
+        private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= OnMainWindowLoaded;
+            OpenProjectBrowserDialog();
+            
+        }
+
+        private void OpenProjectBrowserDialog()
+        {
+            var projectBrowser = new ProjectBrowserDialog();
+            if(projectBrowser.ShowDialog() == false)
+            {
+                Application.Current.Shutdown();
+            }else
+            {
+                //projectBrowser.Show();
+            }
+
+            
         }
     }
 }
